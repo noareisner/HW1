@@ -1,9 +1,35 @@
 import java.util.Arrays;
 
 public class Assignment01Q04 {
+    public static void ShiftOneStep_R(int[] array, char direction) {
+            int temp = array[array.length -1] ;
+            for (int i = array.length - 1 ; i > 0 ; i--) {
+                array[i] = array[i-1] ;
+            }
+            array[0] = temp ;
+
+    }
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        if (move == 0 || array.length == 0 || (direction != 'R' && direction != 'L')) {
+            return array ;
+        }
+        if (move < 0) {
+            move = -move ;
+            if (direction == 'R') {
+                direction = 'L' ;
+            } else {
+                direction = 'R' ;
+            }
+        }
+        move = move % array.length ;
+        if (direction == 'L' && move != 0) {
+            move = array.length - move ;
+            direction = 'R' ;
+        }
+        for (int i = 0 ; i < move ; i++) {
+            ShiftOneStep_R(array, direction);
+        }
         return array;
     }
 
